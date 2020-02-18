@@ -24,11 +24,10 @@
     </style>
   </head>
   <body>
-    <div class="popup" onclick="createPopup()">
-      <span class="popuptext" id="myPopup">""</span>
-    </div>
+    <div id='HouseInfo'></div>
     <div class="background">
       <div id="characters">
+        </div>
         <ul></ul>
       </div>
     </div>
@@ -66,27 +65,38 @@
             .then(() => {
               // console.log(fullCharList);
               let everyone = fullCharList.map(array => {
-                return `<li><a href=${array.allegiances}>${array.name}</li></a>`;
-                preventDefaut();
-                function createPopup() {
-                  addEventListener("click", e => {
-                    let alist = document.querySelector("a");
-                    let text = `You have selected ${array.name} from ${array.region}. They have been dubbed ${array.titles}`;
-                    let pops = document.querySelector("#myPopup");
-                    pops.innerHTML.$(text).appendTo("#myPopup");
-                    popup.classList.toggle("show");
-                  });
-                }
+                return `<li><a href=${array.allegiances}>${array.name}</a></li>`;
               });
               let chars = document.querySelector("#characters");
               chars.innerHTML = everyone.join("");
             });
         }
+        characters.addEventListener("click", e => {
+          e.preventDefault();
+          console.log("I exist");
+          console.log(e);
+          let alist = document.querySelector("a");
+          // e.alist.target;
+          let url = e.target.href;
+          console.log(url);
+          fetch(url)
+            .then(response => {
+              return response.json();
+            })
+            .then(array => {
+              console.log(array);
+              let pops = document.querySelector("#HouseInfo");
+              $("#HouseInfo").text(
+                array.name,
+              );
+            });
+        });
       });
-
-      createPopup();
     </script>
-    <!-- // 1. API Call to get the list of characters
+  </body>
+</html>
+
+<!-- // 1. API Call to get the list of characters
     // 2. Place results inside of DOM
     // <a href='url to detalied character info'    > charcter name>
     //     3. Create DOM elementrepresenting all a tags on the page
@@ -95,5 +105,13 @@
     //    new API call off  the call
     //     new Data
     //     display data on page -->
-  </body>
-</html>
+
+<!-- function createPopup() {
+  addEventListener("click", e => {
+    // let alist = document.querySelector("a");
+    let text = `You have selected ${array.name} from ${array.region}. They have been dubbed ${array.titles}`;
+    let pops = document.querySelector("#myPopup");
+    pops.innerHTML.$(text).appendTo("#myPopup");
+    popup.classList.toggle("show");
+  });
+} -->
