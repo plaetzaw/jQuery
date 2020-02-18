@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Game of Thrones Characters</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -16,10 +16,17 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <style>
+      .background {
+        background-image: url(https://i2.wp.com/wallur.com/wp-content/uploads/2016/12/got-background-6.jpg?w=1920);
+      }
+    </style>
   </head>
   <body>
-    <div id="characters">
-      <ul></ul>
+    <div class="background">
+      <div id="characters">
+        <ul></ul>
+      </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -55,14 +62,13 @@
             .then(() => {
               console.log(fullCharList);
               let everyone = fullCharList.map(array => {
-                return `<li>${array.name}</li>`;
+                return `<li><a href=${array.allegiances}>${array.name}</li></a>`;
               });
               let chars = document.querySelector("#characters");
               chars.innerHTML = everyone.join("");
             });
         }
       });
-      fetch(``);
     </script>
     <!-- // 1. API Call to get the list of characters
     // 2. Place results inside of DOM
