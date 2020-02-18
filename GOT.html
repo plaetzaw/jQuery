@@ -16,13 +16,17 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="GOT.CSS" />
     <style>
-      .background {
-        background-image: url(https://i2.wp.com/wallur.com/wp-content/uploads/2016/12/got-background-6.jpg?w=1920);
-      }
+      /* .background {
+        /* background-image: url(https://i2.wp.com/wallur.com/wp-content/uploads/2016/12/got-background-6.jpg?w=1920); */
+      /* } */
     </style>
   </head>
   <body>
+    <div class="popup" onclick="createPopup()">
+      <span class="popuptext" id="myPopup">""</span>
+    </div>
     <div class="background">
       <div id="characters">
         <ul></ul>
@@ -60,15 +64,27 @@
               fullCharList = [...fullCharList, ...charArray];
             })
             .then(() => {
-              console.log(fullCharList);
+              // console.log(fullCharList);
               let everyone = fullCharList.map(array => {
                 return `<li><a href=${array.allegiances}>${array.name}</li></a>`;
+                preventDefaut();
+                function createPopup() {
+                  addEventListener("click", e => {
+                    let alist = document.querySelector("a");
+                    let text = `You have selected ${array.name} from ${array.region}. They have been dubbed ${array.titles}`;
+                    let pops = document.querySelector("#myPopup");
+                    pops.innerHTML.$(text).appendTo("#myPopup");
+                    popup.classList.toggle("show");
+                  });
+                }
               });
               let chars = document.querySelector("#characters");
               chars.innerHTML = everyone.join("");
             });
         }
       });
+
+      createPopup();
     </script>
     <!-- // 1. API Call to get the list of characters
     // 2. Place results inside of DOM
